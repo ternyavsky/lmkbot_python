@@ -1,11 +1,15 @@
 import logging
 import fitz
 import time
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 from utils import get_shedule, get_color
+from dotenv import load_dotenv
 
-API_TOKEN = '5889044797:AAEdD4qXKzJE9KRuKAKKsv8-aabIM6qkLCQ'
+load_dotenv(".env")
+
+API_TOKEN = os.getenv("API_TOKEN")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
