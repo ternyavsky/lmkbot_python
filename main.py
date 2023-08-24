@@ -16,7 +16,7 @@ dp = Dispatcher(bot=bot)
 
 
 kb = [
-        [types.KeyboardButton(text='Замены'), 
+    [types.KeyboardButton(text='Замены'), 
          types.KeyboardButton(text="Цвет недели")]
     ]
 
