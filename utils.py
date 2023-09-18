@@ -11,9 +11,10 @@ def get_shedule():
     result = None
     name = None
     for i in tags:
-        if 'Расписание занятий' in i.text:
+        if '2023' in i.text:
             result = i['href']
             name = i.text
+    print(result)
 
     sec_url = 'http://lmk-lipetsk.ru{}'.format(result)
     get_pdf = requests.get(sec_url)

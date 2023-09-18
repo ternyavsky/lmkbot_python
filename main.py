@@ -51,6 +51,8 @@ async def color_week(message):
         a = get_color()
         await message.answer(a)
 
+    if message.text == 'О создателях':
+        await message.answer("admin: @ilyaternyavsky")
     if message.text == 'Замены':
         start = time.time()
         print('work')
