@@ -2,10 +2,11 @@ from bs4 import BeautifulSoup as bs
 import requests
 import time
 
-url = 'http://lmk-lipetsk.ru/main_razdel/shedule/index.php'
-res = requests.get(url)
-soup = bs(res.content, 'html.parser')
+
 def get_shedule():
+    url = 'http://lmk-lipetsk.ru/main_razdel/shedule/index.php'
+    res = requests.get(url)
+    soup = bs(res.content, 'html.parser')
     start = time.time()
     tags =soup.find_all('a', target='_blank')
     result = None
@@ -24,10 +25,12 @@ def get_shedule():
     return name
 
 def get_color():
+    url = 'http://lmk-lipetsk.ru/main_razdel/shedule/index.php'
+    res = requests.get(url)
+    soup = bs(res.content, 'html.parser')
     tags = soup.find_all('h3')
     result = None
     for i in tags:
-
         if 'неделя' in i.text:
             result = i.text 
     return result

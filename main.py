@@ -11,6 +11,8 @@ import threading
 import asyncio
 from utils import get_shedule, get_color
 from dotenv import load_dotenv
+from threading import Thread
+from datetime import datetime
 
 load_dotenv(".env")
 
@@ -33,10 +35,18 @@ kb = [
 
 keyboard = types.ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
 
+def sheduled_task(chat_id:int=-1001469563110):
+    while True:
+        now = datetime.now()
+        if now.strftime("%H:%M:%S") == "20:00:00":
+            bot.send_poll(chat_id, "Придешь?", ["Да", "Нет(по заявлению)", "Нет(по приказу)", "Нет(на больничном)"], is_anonymous=False, reply_markup=keyboard)
+            time.sleep(1)
+
 @dp.message_handler(commands=['start'], )
 async def send_welcome(message: types.Message):
+    print(message.chat.id)
     start = time.time()
-    await message.reply(f"Привет, {message.chat.first_name}! Это бот иcип, замены и цвет недели - здесь", reply_markup=keyboard)
+    await message.reply(f"Привет, {message.from_user.username}! Это бот иcип, замены и цвет недели - здесь", reply_markup=keyboard)
     print(time.time() - start)
 
 @dp.message_handler(commands=["help"])
@@ -78,7 +88,7 @@ async def color_week(message):
         
     
         
-
+Thread(target=sheduled_task).start()
         
 
         
