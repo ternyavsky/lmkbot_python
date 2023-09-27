@@ -22,7 +22,6 @@ API_TOKEN = os.getenv("API_TOKEN")
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-
 bot = Bot(API_TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot=bot)
 
@@ -39,16 +38,11 @@ keyboard = types.ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
 async def task(chat_id:int=-1001469563110):
     while True:
         now = datetime.now()
-        if now.strftime("%H:%M:%S") == "21:59:00":
-            time.sleep(1)
-            return await bot.send_poll(chat_id, "Придешь?", ["Да", "Нет(по заявлению)", "Нет(по приказу)", "Нет(на больничном)"], is_anonymous=False, reply_markup=keyboard)
-        
-  
-
-def sheduled_task(_loop):
-    coro = task()
-    future = asyncio.run_coroutine_threadsafe(coro, _loop)
-
+        print(now)
+        if now.strftime("%H:%M:%S") == "20:00:00":
+            await asyncio.sleep(1)
+            await bot.send_poll(chat_id, "Придешь?", ["Да", "Нет(по заявлению)", "Нет(по приказу)", "Нет(на больничном)"], is_anonymous=False, reply_markup=keyboard)
+        await asyncio.sleep(1)
 
 @dp.message_handler(commands=['start'], )
 async def send_welcome(message: types.Message):
@@ -101,7 +95,5 @@ async def color_week(message):
 
         
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    x = Thread(target=sheduled_task, args=(loop, ))
-    x.start()
+    asyncio.get_event_loop().create_task(task())
     executor.start_polling(dp)
