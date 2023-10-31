@@ -13,7 +13,6 @@ from utils import get_shedule, get_color
 from dotenv import load_dotenv
 from threading import Thread
 from datetime import datetime
-import aioschedule
 
 load_dotenv(".env")
 

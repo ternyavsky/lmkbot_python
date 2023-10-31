@@ -12,9 +12,11 @@ def get_shedule():
     result = None
     name = None
     for i in tags:
+        print(i)
         if '2023' in i.text:
             result = i['href']
             name = i.text
+            break
     print(result)
 
     sec_url = 'http://lmk-lipetsk.ru{}'.format(result)
